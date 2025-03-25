@@ -1,18 +1,30 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { MessagePattern } from '@nestjs/microservices';
+import { DatabaseService } from './database.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly dbService: DatabaseService,
+  ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @MessagePattern('connect')
+  async connect(config: any) {
+    await this.appService.connect(config);
+    return { message: 'Connected!' };
   }
 
-  @MessagePattern({ role: 'item', cmd: 'create' })
-  createItem(text) {
-    return text;
+  @MessagePattern('connect_2')
+  async connect_2(config: any) {
+    await this.dbService.connect(config);
+    return { message: 'Connected to DB!' };
+  }
+
+  @MessagePattern('query')
+  async query(body: { config: any; sql: string }) {
+    console.log('ASDADASDASDASD');
+    return this.appService.query(body.config, body.sql);
   }
 }

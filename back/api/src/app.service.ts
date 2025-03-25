@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -9,9 +8,17 @@ export class AppService {
     // @Inject('DOP_SERVICE') private client_2: ClientProxy,
   ) {}
 
-  getHello(): Observable<string> {
-    const a = new PrismaClient();
-    return this.client_1.send({ role: 'item', cmd: 'create' }, '11111');
+  getHello(config: any) {
+    const sql = `
+        SELECT a.*
+        FROM auth_user a
+        WHERE a.id = 1
+    `;
+    return this.client_1.send('query', { config, sql });
+  }
+
+  connect(config: any) {
+    return this.client_1.send('connect_2', config);
   }
 
   // getHello_2(): Observable<string> {
