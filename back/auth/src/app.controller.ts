@@ -23,8 +23,8 @@ export class AppController {
   }
 
   @MessagePattern('query')
-  async query(body: { config: any; sql: string }) {
+  async query(body: { config: any; sql: string; params?: any[] }) {
     console.log('ASDADASDASDASD');
-    return this.appService.query(body.config, body.sql);
+    return this.appService.query(body.config, body.sql, body.params);
   }
 }

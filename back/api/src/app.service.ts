@@ -12,9 +12,9 @@ export class AppService {
     const sql = `
         SELECT a.*
         FROM auth_user a
-        WHERE a.id = 1
+        WHERE a.id = $1
     `;
-    return this.client_1.send('query', { config, sql });
+    return this.client_1.send('query', { config, sql, params: [1] });
   }
 
   connect(config: any) {
