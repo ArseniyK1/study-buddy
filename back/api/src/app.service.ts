@@ -15,6 +15,6 @@ export class AppService {
         LEFT JOIN role b ON a.role_id = b.id
         WHERE a.id = $1
     `;
-    return this.client.send('test_conn', { config, sql, params: [1] });
+    return this.client.send('findAllAuthUser', '');
   }
 }
