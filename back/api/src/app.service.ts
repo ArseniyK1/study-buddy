@@ -9,12 +9,12 @@ export class AppService {
   ) {}
 
   test_connect(config: any) {
-    const sql = `--sql
+    const sql = `
         SELECT a.*, b.value as role_value, b.description as role_description
         FROM auth_user a
         LEFT JOIN role b ON a.role_id = b.id
         WHERE a.id = $1
     `;
-    const res = this.client.send('query', { config, sql, params: [1] });
+    return this.client.send('test_conn', { config, sql, params: [1] });
   }
 }
