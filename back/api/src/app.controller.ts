@@ -7,7 +7,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('test_connection')
-  test_connect(@Body() config: any) {
-    return this.appService.test_connect(config);
+  test_connect() {
+    return this.appService.test_connect();
   }
 }

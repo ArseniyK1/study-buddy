@@ -29,7 +29,7 @@ const createUsers = async (quantity: number) => {
 async function main() {
   console.log('Start seeding...');
 
-  await createUsers(100);
+  await createUsers(10000);
 }
 
 main()
