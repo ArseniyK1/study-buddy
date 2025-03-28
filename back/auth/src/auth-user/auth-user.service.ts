@@ -3,6 +3,7 @@ import { UpdateAuthUserDto } from './dto/update-auth-user.dto';
 import { PrismaService } from '../prisma.service';
 import { AuthUser } from './entities/auth-user.entity';
 import { getUserById } from '@prisma/client/sql';
+import { CreateAuthUserDto } from './dto/create-auth-user.dto';
 
 @Injectable()
 export class AuthUserService {
@@ -10,15 +11,15 @@ export class AuthUserService {
 
   async findAll(): Promise<AuthUser> {
     // return this.prisma.$queryRawTyped(getUserById(50));
-    return this.prisma.auth_user.findUnique({
+    return await this.prisma.auth_user.findUnique({
       where: {
         id: 50,
       },
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} authUser`;
+  async signUp(dto: CreateAuthUserDto) {
+    // return await this.prisma.auth_user.create();
   }
 
   update(id: number, updateAuthUserDto: UpdateAuthUserDto) {
