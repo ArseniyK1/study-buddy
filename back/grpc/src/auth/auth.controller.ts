@@ -1,19 +1,29 @@
+// grpc-micro/src/auth.controller.ts
 import { Controller } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import {
-  AuthResponse,
-  ErrorResponse,
-  SignInRequest,
-} from '../proto/generated/auth';
 import { GrpcMethod } from '@nestjs/microservices';
+import { ClientProxy, Client } from '@nestjs/microservices';
+import { Transport } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
+import { UserListResponse } from 'src/generated-types/auth';
 
 @Controller()
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  @Client({
+    transport: Transport.TCP,
+    options: {
+      host: 'localhost',
+      port: 3001,
+    },
+  })
+  private authClient: ClientProxy;
 
-  @GrpcMethod('AuthService', 'SignIn')
-  signIn(data: SignInRequest): AuthResponse | ErrorResponse {
-    console.log(data);
-    return { accessToken: 'ACCESS_TOKEN' };
+  @GrpcMethod('AuthService', 'FindAllAuthUser')
+  async findAllAuthUsers(): Promise<UserListResponse> {
+    // Перенаправляем запрос в auth-micro через TCP
+    const result = await firstValueFrom(
+      this.authClient.send('findAllAuthUser', {}),
+    );
+    return { users: result };
   }
 }
+//

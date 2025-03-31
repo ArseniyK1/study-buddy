@@ -27,17 +27,17 @@ import { join } from 'path';
         }),
         inject: [ConfigService],
       },
-      // {
-      //   name: 'DOP_SERVICE',
-      //   useFactory: (configService: ConfigService) => ({
-      //     transport: Transport.TCP,
-      //     options: {
-      //       host: configService.get<string>('DOP_SERVICE_HOST'),
-      //       port: configService.get<number>('DOP_SERVICE_PORT'),
-      //     },
-      //   }),
-      //   inject: [ConfigService],
-      // },
+    ]),
+    ClientsModule.register([
+      {
+        name: 'GRPC_SERVICE',
+        transport: Transport.GRPC,
+        options: {
+          package: 'auth',
+          protoPath: join(__dirname, '..', '..', 'proto/proto/auth.proto'),
+          url: 'localhost:50001', // адрес grpc-micro
+        },
+      },
     ]),
   ],
   controllers: [AppController],

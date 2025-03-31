@@ -13,11 +13,6 @@ export class AuthUserController {
     return this.authUserService.findAll();
   }
 
-  @MessagePattern('findOneAuthUser')
-  findOne(@Payload() id: number) {
-    return this.authUserService.findOne(id);
-  }
-
   @MessagePattern('updateAuthUser')
   update(@Payload() updateAuthUserDto: UpdateAuthUserDto) {
     return this.authUserService.update(updateAuthUserDto.id, updateAuthUserDto);
