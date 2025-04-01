@@ -7,9 +7,9 @@ import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
+  // app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
 
-  await app.startAllMicroservices();
+  // await app.startAllMicroservices();
 
   const config = new ConfigService();
   const port = config.get('PORT') ?? 3000;

@@ -1,13 +1,10 @@
-// import { AuthServiceClient } from '../../grpc/src/generated-types/auth';
-import { Controller, Get, Inject, OnModuleInit, Post } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
-import { join } from 'path';
-import { Metadata } from '@grpc/grpc-js';
+import { ClientGrpc } from '@nestjs/microservices';
 
 interface AuthService {
   FindAllUsers(request: object): Observable<{ users: any[] }>;
+  SignIn({ email, password }): any;
 }
 
 @Controller()
@@ -23,9 +20,6 @@ export class AppController implements OnModuleInit {
 
   @Get('/users')
   getUsers() {
-    const metadata = new Metadata();
-    metadata.add('Set-Cookie', 'yummy_cookie=choco');
-
-    return this.authService.FindAllUsers({}); // Теперь метод существует!
+    return this.authService.SignIn({ email: 'email', password: 'password' }); // Теперь метод существует!
   }
 }

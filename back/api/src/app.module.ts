@@ -35,7 +35,7 @@ import { join } from 'path';
         options: {
           package: 'auth',
           protoPath: join(__dirname, '..', '..', 'proto/proto/auth.proto'),
-          url: 'localhost:50001', // адрес grpc-micro
+          url: 'localhost:5000', // адрес grpc-micro
         },
       },
     ]),
