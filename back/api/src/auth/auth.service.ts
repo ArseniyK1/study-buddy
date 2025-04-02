@@ -1,4 +1,4 @@
-import { AuthResponse } from '../../../grpc/src/generated-types/auth';
+// import { AuthResponse } from '../../../grpc/src/generated-types/auth';
 import { SignInDto } from './dto/sing-in.dto';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 interface AuthServiceClient {
   FindAllUsers(request: object): Observable<{ users: any[] }>;
-  SignIn(dto: SignInDto): Observable<AuthResponse>;
+  SignIn(dto: SignInDto): Observable<any>;
 }
 
 @Injectable()
@@ -26,7 +26,7 @@ export class AuthService implements OnModuleInit {
     }); // Теперь метод существует!
   }
 
-  signIn(dto: SignInDto): Observable<AuthResponse> {
+  signIn(dto: SignInDto): Observable<any> {
     return this.authService.SignIn(dto);
   }
 }
