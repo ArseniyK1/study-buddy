@@ -1,9 +1,8 @@
+// back/api/main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MicroserviceOptions } from '@nestjs/microservices';
-import { grpcClientOptions } from './grpc-client.options';
-import { join } from 'path';
+import { ConfigService } from '@nestjs/config';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +12,8 @@ async function bootstrap() {
 
   const config = new ConfigService();
   const port = config.get('PORT') ?? 3000;
+  // app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api');
 
   await app.listen(port);
   console.log(`Server started on port ${await app.getUrl()}`);

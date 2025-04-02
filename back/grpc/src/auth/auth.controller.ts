@@ -30,7 +30,7 @@
 import { Controller, Inject } from '@nestjs/common';
 import { ClientProxy, GrpcMethod } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import { AuthResponse, SignInRequest } from 'src/generated-types/auth';
+import { AuthResponse, SignInRequest } from '@proto-types/auth';
 
 @Controller()
 export class AuthController {
