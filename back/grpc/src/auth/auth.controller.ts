@@ -27,17 +27,25 @@
 //   }
 // }
 // //
-import { Controller } from '@nestjs/common';
-import { GrpcMethod } from '@nestjs/microservices';
+import { Controller, Inject } from '@nestjs/common';
+import { ClientProxy, GrpcMethod } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
 import { AuthResponse, SignInRequest } from 'src/generated-types/auth';
 
 @Controller()
 export class AuthController {
+  constructor(@Inject('AUTH_SERVICE') private auth_service: ClientProxy) {}
+
   @GrpcMethod('AuthService', 'SignIn')
-  signIn(data: SignInRequest): AuthResponse {
+  async signIn(data: SignInRequest): Promise<AuthResponse> {
     console.log('gRPC SignIn called with:', data);
 
+    const res = await firstValueFrom(
+      this.auth_service.send('findAllAuthUser', { name: 'asd' }),
+    );
+    console.log(res);
+
     // Ваша логика аутентификации
-    return { accessToken: 'jwt_token_here' };
+    return { accessToken: 'Success', ...res };
   }
 }

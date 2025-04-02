@@ -9,8 +9,8 @@ export class AuthUserController {
   constructor(private readonly authUserService: AuthUserService) {}
 
   @MessagePattern('findAllAuthUser')
-  findAll() {
-    return this.authUserService.findAll();
+  findAll(data: { name: string }) {
+    return this.authUserService.findAll(data);
   }
 
   @MessagePattern('updateAuthUser')

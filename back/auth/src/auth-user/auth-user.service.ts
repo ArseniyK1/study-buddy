@@ -9,7 +9,9 @@ import { CreateAuthUserDto } from './dto/create-auth-user.dto';
 export class AuthUserService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(): Promise<AuthUser[]> {
+  async findAll(data: { name: string }): Promise<AuthUser[]> {
+    console.log(data);
+
     // return this.prisma.$queryRawTyped(getUserById(50));
     return await this.prisma.auth_user.findMany();
   }
