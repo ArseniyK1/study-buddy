@@ -1,0 +1,19 @@
+{
+  "name": "monorepo",
+  "private": true,
+  "workspaces": [
+    "api",
+    "auth",
+    "grpc"
+  ],
+  "scripts": {
+    "install:api": "cd api && npm install",
+    "install:auth": "cd auth && npm install",
+    "install:grpc": "cd grpc && npm install",
+    "start:api": "cd api && npm run start:dev",
+    "start:auth": "cd auth && npm run start:dev",
+    "start:grpc": "cd grpc && npm run start:dev",
+    "install:all": "npm run install:api && npm run install:auth && npm run install:grpc",
+    "start:dev": "concurrently --prefix-colors \"bgBlue.bold,bgGreen.bold,bgMagenta.bold\" --prefix \"[{name}]\" --names \"API,AUTH,GRPC\" \"cd api && npm run start:dev\" \"cd auth && npm run start:dev\" \"cd grpc && npm run start:dev\""
+  }
+}
