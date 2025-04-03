@@ -1,2 +1,0 @@
-# Запретить замену LF → CRLF для .gitignore
-back/grpc/.gitignore text eol=lf
