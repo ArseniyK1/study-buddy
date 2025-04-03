@@ -12,7 +12,8 @@
     "baseUrl": "./",
     "paths": {
       "@proto/*": ["../proto/*"],
-      "@proto-types/*": ["./src/generated-types/*"]
+      "@proto-types/*": ["./src/generated-types/*"],
+      "@shared/*": ["../shared/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

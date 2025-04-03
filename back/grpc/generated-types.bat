@@ -2,7 +2,8 @@
 SETLOCAL
 
 set "SCRIPT_DIR=%~dp0"
-set "NODE_MODULES_PATH=%SCRIPT_DIR%node_modules"
+set "ROOT_DIR=%SCRIPT_DIR%..\"
+set "NODE_MODULES_PATH=%ROOT_DIR%node_modules"
 set "PLUGIN_PATH=%NODE_MODULES_PATH%\.bin\protoc-gen-ts_proto.cmd"
 
 :: Проверка наличия плагина

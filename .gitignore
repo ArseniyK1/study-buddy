@@ -2,7 +2,7 @@
 /dist
 /node_modules
 /build
-
+/back_new
 # Logs
 logs
 *.log
