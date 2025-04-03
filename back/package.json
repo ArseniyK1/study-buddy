@@ -4,7 +4,8 @@
   "workspaces": [
     "api",
     "auth",
-    "grpc"
+    "grpc",
+    "shared"
   ],
   "scripts": {
     "install:api": "cd api && npm install",
@@ -15,5 +16,6 @@
     "start:grpc": "cd grpc && npm run start:dev",
     "install:all": "npm run install:api && npm run install:auth && npm run install:grpc",
     "start:dev": "concurrently --prefix-colors \"bgBlue.bold,bgGreen.bold,bgMagenta.bold\" --prefix \"[{name}]\" --names \"API,AUTH,GRPC\" \"cd api && npm run start:dev\" \"cd auth && npm run start:dev\" \"cd grpc && npm run start:dev\""
+    
   }
 }
